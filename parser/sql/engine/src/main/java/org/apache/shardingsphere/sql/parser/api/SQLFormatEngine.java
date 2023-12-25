@@ -28,6 +28,7 @@ import java.util.Properties;
 
 /**
  * SQL format engine.
+ * SQL格式化引擎
  */
 @RequiredArgsConstructor
 public final class SQLFormatEngine {

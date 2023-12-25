@@ -25,12 +25,19 @@ import org.apache.shardingsphere.sql.parser.core.database.cache.ParseTreeCacheBu
 import org.apache.shardingsphere.sql.parser.core.database.parser.SQLParserExecutor;
 
 /**
+ * SQL解析引擎
  * SQL parser engine.
  */
 public final class SQLParserEngine {
-    
+
+    /**
+     * SQL解析执行器
+     */
     private final SQLParserExecutor sqlParserExecutor;
-    
+
+    /**
+     * 抽象语法树解析缓存
+     */
     private final LoadingCache<String, ParseASTNode> parseTreeCache;
     
     public SQLParserEngine(final DatabaseType databaseType, final CacheOption cacheOption) {
@@ -39,6 +46,7 @@ public final class SQLParserEngine {
     }
     
     public SQLParserEngine(final String databaseType, final CacheOption cacheOption) {
+        // SPI加载
         this(TypedSPILoader.getService(DatabaseType.class, databaseType), cacheOption);
     }
     
@@ -50,6 +58,9 @@ public final class SQLParserEngine {
      * @return parse AST node
      */
     public ParseASTNode parse(final String sql, final boolean useCache) {
+        // 根据是否使用缓存（缓存使用Caffeine框架），来决定执行的方法
+        // parseTreeCache.get(sql)：从缓存中获取抽象语法树
+        // sqlParserExecutor.parse(sql)：解析SQL来生成抽象语法树
         return useCache ? parseTreeCache.get(sql) : sqlParserExecutor.parse(sql);
     }
 }
