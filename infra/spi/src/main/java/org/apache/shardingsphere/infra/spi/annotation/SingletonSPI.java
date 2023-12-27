@@ -24,6 +24,7 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation of singleton SPI.
+ * 被此注解标记的为单例SPI
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

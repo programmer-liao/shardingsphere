@@ -27,18 +27,26 @@ import java.util.ServiceLoader;
 
 /**
  * Registered ShardingSphere SPI.
- * 
+ * 已经加载过的SPI实现类的抽象
  * @param <T> type of service
  */
 class RegisteredShardingSphereSPI<T> {
-    
+
+    /**
+     * SPI接口Class对象
+     */
     private final Class<T> serviceInterface;
-    
+
+    /**
+     * 已经加载的SPI实现类
+     */
     private final Collection<T> services;
     
     RegisteredShardingSphereSPI(final Class<T> serviceInterface) {
         this.serviceInterface = serviceInterface;
+        // 检查参数是否正确（对SPI接口进行合法性检查）
         validate();
+        // 加载SPI实现类
         services = load();
     }
     
@@ -49,6 +57,7 @@ class RegisteredShardingSphereSPI<T> {
     
     private Collection<T> load() {
         Collection<T> result = new LinkedList<>();
+        // 利用Java原生SPI能力实现SPI加载
         for (T each : ServiceLoader.load(serviceInterface)) {
             result.add(each);
         }
@@ -56,12 +65,14 @@ class RegisteredShardingSphereSPI<T> {
     }
     
     Collection<T> getServiceInstances() {
+        // 根据是否有@SingletonSPI注解，决定是否单例加载实例
         return null == serviceInterface.getAnnotation(SingletonSPI.class) ? createNewServiceInstances() : getSingletonServiceInstances();
     }
     
     @SneakyThrows(ReflectiveOperationException.class)
     @SuppressWarnings("unchecked")
     private Collection<T> createNewServiceInstances() {
+        // 重新加载一次
         Collection<T> result = new LinkedList<>();
         for (Object each : services) {
             result.add((T) each.getClass().getDeclaredConstructor().newInstance());
@@ -70,6 +81,7 @@ class RegisteredShardingSphereSPI<T> {
     }
     
     private Collection<T> getSingletonServiceInstances() {
+        // 只从缓存中取
         return services;
     }
 }

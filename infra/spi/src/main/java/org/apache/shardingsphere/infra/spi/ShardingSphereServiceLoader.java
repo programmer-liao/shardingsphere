@@ -26,17 +26,27 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * ShardingSphere service loader.
+ * SPI实现类加载器
  */
+// 构造器私有化
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ShardingSphereServiceLoader {
-    
+
+    /**
+     * 存放已经加载的SPI接口实现类集合
+     * key: SPI接口class对象
+     * value: SPI实现类封装
+     */
     private static final Map<Class<?>, RegisteredShardingSphereSPI<?>> REGISTERED_SERVICES = new ConcurrentHashMap<>();
-    
+
+    /**
+     * 锁对象
+     */
     private static final Object LOAD_LOCK = new Object();
     
     /**
      * Get service instances.
-     *
+     * 获取服务实例
      * @param serviceInterface service interface
      * @param <T> type of service interface
      * @return service instances
@@ -51,14 +61,17 @@ public final class ShardingSphereServiceLoader {
      */
     private static <T> RegisteredShardingSphereSPI<?> getRegisteredSPI(final Class<T> serviceInterface) {
         RegisteredShardingSphereSPI<?> result = REGISTERED_SERVICES.get(serviceInterface);
+        // 从缓存中取
         if (null != result) {
             return result;
         }
         synchronized (LOAD_LOCK) {
+            // 加载SPI实现
             if (!REGISTERED_SERVICES.containsKey(serviceInterface)) {
                 REGISTERED_SERVICES.put(serviceInterface, new RegisteredShardingSphereSPI<>(serviceInterface));
             }
         }
+        // 返回已经加载的SPI对象
         return REGISTERED_SERVICES.get(serviceInterface);
     }
 }

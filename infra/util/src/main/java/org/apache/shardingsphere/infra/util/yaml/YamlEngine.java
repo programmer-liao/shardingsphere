@@ -36,6 +36,7 @@ import java.util.Collection;
 
 /**
  * YAML engine.
+ * YAML访问引擎
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class YamlEngine {
