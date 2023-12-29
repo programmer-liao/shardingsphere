@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Snowflake key generate algorithm.
- * 
+ *  主键生成算法-雪花算法
  * <pre>
  *     Length of key is 64 bit.
  *     1 bit sign bit.

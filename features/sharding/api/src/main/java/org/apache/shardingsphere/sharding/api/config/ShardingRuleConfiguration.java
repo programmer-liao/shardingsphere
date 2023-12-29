@@ -37,31 +37,59 @@ import java.util.Map;
 
 /**
  * Sharding rule configuration.
+ * 分片规则配置绑定类
  */
 @Getter
 @Setter
 public final class ShardingRuleConfiguration implements DatabaseRuleConfiguration, DistributedRuleConfiguration {
-    
+
+    /**
+     * 数据分片规则配置
+     */
     private Collection<ShardingTableRuleConfiguration> tables = new LinkedList<>();
-    
+
+    /**
+     * 自动分片表规则配置
+     */
     private Collection<ShardingAutoTableRuleConfiguration> autoTables = new LinkedList<>();
     
     private Collection<ShardingTableReferenceRuleConfiguration> bindingTableGroups = new LinkedList<>();
-    
+
+    /**
+     * 默认数据库分片策略
+     */
     private ShardingStrategyConfiguration defaultDatabaseShardingStrategy;
-    
+
+    /**
+     * 默认表分片策略
+     */
     private ShardingStrategyConfiguration defaultTableShardingStrategy;
-    
+
+    /**
+     * 默认的分布式序列策略
+     */
     private KeyGenerateStrategyConfiguration defaultKeyGenerateStrategy;
     
     private ShardingAuditStrategyConfiguration defaultAuditStrategy;
-    
+
+    /**
+     * 默认分片列名称
+     */
     private String defaultShardingColumn;
-    
+
+    /**
+     * 分片算法配置
+     */
     private Map<String, AlgorithmConfiguration> shardingAlgorithms = new LinkedHashMap<>();
-    
+
+    /**
+     * 分布式序列算法配置
+     */
     private Map<String, AlgorithmConfiguration> keyGenerators = new LinkedHashMap<>();
-    
+
+    /**
+     * 分片审计算法配置
+     */
     private Map<String, AlgorithmConfiguration> auditors = new LinkedHashMap<>();
     
     private ShardingCacheConfiguration shardingCache;

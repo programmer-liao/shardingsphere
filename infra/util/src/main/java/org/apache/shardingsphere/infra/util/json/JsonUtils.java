@@ -30,6 +30,7 @@ import lombok.SneakyThrows;
 
 /**
  * Json utility class.
+ * Json工具类
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JsonUtils {

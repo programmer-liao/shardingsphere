@@ -31,6 +31,7 @@ import java.util.Properties;
 
 /**
  * Hash sharding algorithm.
+ * 哈希分片算法
  */
 public final class HashModShardingAlgorithm implements StandardShardingAlgorithm<Comparable<?>>, ShardingAutoTableAlgorithm {
     

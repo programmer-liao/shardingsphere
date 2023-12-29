@@ -25,22 +25,42 @@ import org.apache.shardingsphere.sharding.api.config.strategy.keygen.KeyGenerate
 import org.apache.shardingsphere.sharding.api.config.strategy.sharding.ShardingStrategyConfiguration;
 
 /**
- * Sharding table rule configuration.
+ * Sharding table rule configuration.、
+ * 数据分片规则配置绑定类
  */
 @RequiredArgsConstructor
 @Getter
 @Setter
 public final class ShardingTableRuleConfiguration {
-    
+
+    /**
+     * 逻辑表名称
+     */
     private final String logicTable;
-    
+
+    /**
+     * 实际数据节点
+     * 由数据源名 + 表名组成（参考 Inline 语法规则）
+     */
     private final String actualDataNodes;
-    
+
+    /**
+     * 分库策略
+     */
     private ShardingStrategyConfiguration databaseShardingStrategy;
-    
+
+    /**
+     * 分表策略
+     */
     private ShardingStrategyConfiguration tableShardingStrategy;
-    
+
+    /**
+     * 分布式序列策略
+     */
     private KeyGenerateStrategyConfiguration keyGenerateStrategy;
-    
+
+    /**
+     * 分片审计策略
+     */
     private ShardingAuditStrategyConfiguration auditStrategy;
 }

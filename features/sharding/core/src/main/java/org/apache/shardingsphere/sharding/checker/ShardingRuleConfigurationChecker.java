@@ -40,9 +40,13 @@ import java.util.Map;
 
 /**
  * Sharding rule configuration checker.
+ * 分片规则配置检查类
  */
 public final class ShardingRuleConfigurationChecker implements RuleConfigurationChecker<ShardingRuleConfiguration> {
-    
+
+    /**
+     * 分片规则配置检查
+     */
     @Override
     public void check(final String databaseName, final ShardingRuleConfiguration config, final Map<String, DataSource> dataSourceMap, final Collection<ShardingSphereRule> builtRules) {
         Collection<String> keyGenerators = config.getKeyGenerators().keySet();

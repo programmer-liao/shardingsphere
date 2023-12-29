@@ -25,6 +25,7 @@ import java.util.Properties;
 
 /**
  * environment context.
+ * 环境上下文
  */
 public final class EnvironmentContext {
     

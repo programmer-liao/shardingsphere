@@ -22,6 +22,7 @@ import org.apache.shardingsphere.sharding.exception.ShardingSQLException;
 
 /**
  * Mismatched inline sharding algorithm's expression and column exception.
+ * 内置分片算法与列不匹配的异常
  */
 public final class MismatchedInlineShardingAlgorithmExpressionAndColumnException extends ShardingSQLException {
     
