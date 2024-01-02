@@ -23,6 +23,7 @@ import org.apache.shardingsphere.sql.parser.autogen.MySQLStatementLexer;
 
 /**
  * SQL lexer for MySQL.
+ * MySQL 词法分析器
  */
 public final class MySQLLexer extends MySQLStatementLexer implements SQLLexer {
     
